@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-brand="sy-corniche">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SY · Corniche — اللاذقية</title>
+<link rel="stylesheet" href="tokens.css" />
+<style>
+  :root{
+    --font-cairo:"Cairo",ui-sans-serif,system-ui,sans-serif;
+    --font-satoshi:"Satoshi",ui-sans-serif,system-ui,sans-serif;
+    --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:rgb(var(--canvas));color:rgb(var(--ink));
+    font-family:var(--font-satoshi);-webkit-font-smoothing:antialiased;line-height:1.6}
+  @font-face{font-family:Cairo;font-display:swap;src:url(https://fonts.gstatic.com/s/cairo/v28/SLXVc1nY6HkvangtZmpEaQLTN7B-.woff2) format("woff2");font-weight:400 900;font-style:normal}
+  @font-face{font-family:Satoshi;font-display:swap;src:url(https://fonts.gstatic.com/s/satoshi/v12/k1fLYmOhMqeuYa3hpDDxOU9cIoN.woff2) format("woff2");font-weight:300 900;font-style:normal}
+  @font-face{font-family:"JetBrains Mono";font-display:swap;src:url(https://fonts.gstatic.com/s/jetbrainsmono/v23/tDbD2o-flEEny0FZhsf21BU1Yj9nw5VD1y2H.woff2) format("woff2");font-weight:100 800;font-style:normal}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:32px 20px 120px}
+  header{text-align:center;padding:24px 0 8px}
+  .kick{font-size:12px;letter-spacing:.28em;color:rgb(var(--ink-tertiary));text-transform:uppercase}
+  h1{font-family:var(--font-cairo);font-size:clamp(32px,5vw,56px);margin:8px 0 6px;font-weight:800;letter-spacing:-.01em;color:rgb(var(--ink))}
+  header p{color:rgb(var(--ink-secondary));margin:0;font-size:16px;max-width:60ch;margin-inline:auto}
+  .badge{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 16px;border-radius:999px;
+    background:rgb(var(--accent)/.12);border:1px solid rgb(var(--accent)/.25);color:rgb(var(--accent));
+    font-size:13px;font-weight:700;letter-spacing:.04em}
+  .badge::before{content:"";width:8px;height:8px;border-radius:50%;background:rgb(var(--accent));box-shadow:0 0 12px rgb(var(--accent)/.6)}
+
+  section{margin-top:60px}
+  .sec-title{font-family:var(--font-cairo);font-size:28px;font-weight:800;margin:0 0 4px;color:rgb(var(--ink))}
+  .sec-desc{color:rgb(var(--ink-secondary));margin:0 0 24px;max-width:58ch}
+
+  /* Swatches */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .sw{padding:20px 16px;border-radius:16px;display:flex;flex-direction:column;align-items:center;gap:8px;
+    border:1px solid rgb(var(--border-soft));background:rgb(var(--canvas-2));transition:transform .2s var(--ease-out-expo),box-shadow .2s}
+  .sw:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .sw code{font-family:var(--font-mono);font-size:11px;background:rgb(var(--canvas-3));padding:3px 8px;border-radius:6px;color:rgb(var(--ink))}
+  .sw .nm{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgb(var(--ink-tertiary))}
+  .sw .val{font-family:var(--font-cairo);font-size:20px;font-weight:800;color:rgb(var(--ink))}
+
+  /* Doodle field */
+  .field{position:relative;height:280px;border-radius:20px;overflow:hidden;border:1px solid rgb(var(--border-soft));
+    background:rgb(var(--canvas-2))}
+  .field svg{position:absolute;inset:0;width:100%;height:100%}
+  .field .flabel{position:absolute;inset-inline-start:20px;bottom:18px;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;font-weight:700;color:rgb(var(--ink-tertiary))}
+
+  /* UI Mock card */
+  .mock{border-radius:20px;overflow:hidden;border:1px solid rgb(var(--border-soft));background:rgb(var(--canvas-2))}
+  .mock .bar{height:56px;display:flex;align-items:center;gap:12px;padding:0 20px;font-family:var(--font-cairo);
+    font-size:17px;font-weight:800;color:rgb(var(--ink));background:rgb(var(--canvas-3))}
+  .mock .bar .dot{width:12px;height:12px;border-radius:50%;background:rgb(var(--accent));
+    box-shadow:0 0 16px rgb(var(--accent)/.5);animation:pulse 2.5s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .mock .body{padding:20px}
+  .mock .card{background:rgb(var(--canvas-3));border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px}
+  .mock .row{display:flex;align-items:center;gap:14px}
+  .mock .thumb{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;background:rgb(var(--accent)/.12)}
+  .mock .thumb svg{width:30px;height:30px;stroke:rgb(var(--accent))}
+  .mock .grow{flex:1;min-width:0}
+  .mock .t1{font-family:var(--font-cairo);font-weight:800;font-size:16px;color:rgb(var(--ink))}
+  .mock .t2{font-size:13px;color:rgb(var(--ink-secondary))}
+  .mock .pill{font-size:11px;font-weight:800;padding:6px 12px;border-radius:999px;white-space:nowrap;
+    background:rgb(var(--accent)/.12);color:rgb(var(--accent));border:1px solid rgb(var(--accent)/.25)}
+  .mock .steps{display:flex;gap:8px;margin-top:4px}
+  .mock .step{flex:1;height:6px;border-radius:999px;background:rgb(var(--border-soft))}
+  .mock .step.filled{background:rgb(var(--accent))}
+  .mock .info-row{display:flex;gap:16px;margin-top:4px}
+  .mock .info{display:flex;align-items:center;gap:8px;font-size:13px;color:rgb(var(--ink-secondary))}
+  .mock .info svg{width:18px;height:18px;stroke:rgb(var(--accent2));flex-shrink:0}
+  .mock .cta{margin-top:8px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;
+    font-family:var(--font-cairo);font-weight:800;font-size:16px;color:#fff;background:rgb(var(--accent));
+    box-shadow:var(--shadow-glow);transition:transform .15s var(--ease-out-expo),box-shadow .15s}
+  .mock .cta:active{transform:scale(.98)}
+  .mock .cta svg{width:20px;height:20px}
+
+  /* FAB (imported from fab.js) - styles are inline there */
+
+  footer{margin-top:80px;text-align:center;color:rgb(var(--ink-tertiary));font-size:13px}
+  footer a{color:rgb(var(--accent));text-decoration:none;border-bottom:1px solid transparent;transition:border .2s}
+  footer a:hover{border-color:rgb(var(--accent))}
+  .legend{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 24px;margin-top:16px;font-size:13px;color:rgb(var(--ink-secondary))}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kick">SY · Latakia Hyperlocal</div>
+    <h1>Corniche</h1>
+    <p>هوية ساحل متوسطي · تركوازي ثقة + كورال شهي · سوبر-آب توصيل هايبر-لوكال للاذقية</p>
+    <div class="badge">الاتجاه المعتمد</div>
+  </header>
+
+  <section>
+    <h2 class="sec-title">لوحة الألوان</h2>
+    <p class="sec-desc">مستوحاة من بحر اللاذقية وكورنيشها — تركوازي عميق للثقة والهدوء، كورال دافئ للشهية والترحيب. ليل بحري كلوحة، أبيض مائل للتركواز للحبر.</p>
+    <div class="swatches">
+      <div class="sw" style="background:rgb(var(--accent))"><span class="nm">Accent</span><code>#0F8F84</code><div class="val" style="color:#fff">تركوازي</div></div>
+      <div class="sw" style="background:rgb(var(--accent-2))"><span class="nm">Accent 2</span><code>#F2A15A</code><div class="val" style="color:#111">كورال</div></div>
+      <div class="sw" style="background:rgb(var(--canvas))"><span class="nm">Canvas</span><code>#0B1C1E</code><div class="val" style="color:#fff">ليل بحري</div></div>
+      <div class="sw" style="background:rgb(var(--canvas-2))"><span class="nm">Surface</span><code>#0E2426</code><div class="val" style="color:#fff">كارت</div></div>
+      <div class="sw" style="background:rgb(var(--ink))"><span class="nm">Ink</span><code>#EAF4F1</code><div class="val" style="color:#111">أبيض بحري</div></div>
+      <div class="sw" style="background:rgb(var(--ink-tertiary))"><span class="nm">Muted</span><code>#547673</code><div class="val" style="color:#fff">ثانوي</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">الحقل البصري — ١٨ دودل</h2>
+    <p class="sec-desc">مفردات التوصيل الهايبر-لوكال: الحركة · العنوان · وعد الوقت · الشفافية · الساحل · الثقة. نفس النَفَس الخطّي، تتراص كنسيج خلفية واحد.</p>
+    <div class="field" id="doodle-field">
+      <span class="flabel">الحقل المحيط — نفس الدودل يتراص كنسيج</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">كارت طلب حي — المندوب يقطع المسافة</h2>
+    <p class="sec-desc">واجهة طلب حقيقية بالألوان المعتمدة: سكوتر، خطوات تقدّم، وعد وقت (١٨ دقيقة)، فاتورة شفافة، زرار تتبّع تركوازي.</p>
+    <div class="mock" id="live-mock"></div>
+  </section>
+
+  <footer>
+    <div class="legend">
+      <span>🌊 تركوازي = ثقة</span><span>🪸 كورال = شهية</span><span>🛵 سكوتر = وعد وصول</span><span>📍 دبوس = وجهة</span>
+    </div>
+    <p>SY Corniche Design System · <a href="https://github.com/kariemSeiam/sy-delivery">github.com/kariemSeiam/sy-delivery</a> · <span id="ts"></span></p>
+  </footer>
+</div>
+
+<!-- Doodle field renderer (self-contained) -->
+<script type="module">
+import { doodles } from './doodles.js';
+
+const { icons, placements, tileSize } = doodles;
+const svg = (d, stroke) =>
+  `<path d="${d}" fill="none" stroke="${stroke}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+const tiles = placements.map(p => {
+  const ic = icons[p.iconIndex];
+  if (!ic) return "";
+  const vb = ic.viewBox ?? "0 0 24 24";
+  const sz = ic.size ?? 24;
+  const inner = ic.path
+    ? svg(ic.path, "currentColor")
+    : `<g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ic.markup}</g>`;
+  return `<g transform="translate(${p.x}, ${p.y}) rotate(${p.rotation}) scale(${p.scale})"><svg viewBox="${vb}" width="${sz}" height="${sz}" overflow="visible">${inner}</svg></g>`;
+}).join("");
+
+const field = document.getElementById("doodle-field");
+field.innerHTML += `
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="opacity:.45">
+    <defs>
+      <pattern id="sy-tile" patternUnits="userSpaceOnUse" width="${tileSize}" height="${tileSize}">${tiles}</pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#sy-tile)" />
+  </svg>`;
+
+// Set field color to accent
+field.style.color = "rgb(var(--accent))";
+</script>
+
+<!-- Live mock renderer -->
+<script type="module">
+import { icons } from './doodles.js';
+
+const svg = (d, stroke, w=1.7) =>
+  `<svg viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+
+const scooter = icons.find(i=>i.k==="scooter").d;
+const timer = icons.find(i=>i.k==="timer").d;
+const receipt = icons.find(i=>i.k==="receipt").d;
+const pin = icons.find(i=>i.k==="pin").d;
+
+document.getElementById("live-mock").innerHTML = `
+  <div class="bar"><span class="dot"></span>SY · Corniche</div>
+  <div class="body">
+    <div class="card">
+      <div class="row">
+        <div class="thumb">${svg(scooter, "rgb(var(--accent))")}</div>
+        <div class="grow">
+          <div class="t1">طلبك في الطريق</div>
+          <div class="t2">مندوب حقيقي · تتبّع حي</div>
+        </div>
+        <span class="pill">رسوم واضحة</span>
+      </div>
+      <div class="steps">
+        <div class="step filled"></div>
+        <div class="step filled"></div>
+        <div class="step filled"></div>
+        <div class="step"></div>
+      </div>
+      <div class="info-row">
+        <div class="info">${svg(timer, "rgb(var(--accent-2))", 1.8)}<span>وعد الوصول <b style="color:rgb(var(--accent-2))">١٨ دقيقة</b></span></div>
+        <div class="info">${svg(receipt, "rgb(var(--ink-tertiary))", 1.5)}<span>فاتورة شفافة</span></div>
+      </div>
+      <div class="cta">${svg(pin, "#fff", 2)} تتبّع الطلب</div>
+    </div>
+  </div>`;
+</script>
+
+<!-- The FAB — scooter riding the reading ring -->
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   SY Corniche FAB — self-contained, zero deps
+   Reads nearest section accent, rider stays upright on the ring
+   ══════════════════════════════════════════════════════════════════ */
+(function(){
+  // Icons (inline from doodles.ts — scooter + pin)
+  const scooter = "M4 15.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4M17 15.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4M6 17.5h9M7 17.5l1.5-5h6.5v3.5M10 12.5l1-2h4.5l1 2";
+  const pin = "M12 21c4-5 6-8 6-11a6 6 0 1 0-12 0c0 3 2 6 6 11M12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4";
+
+  const R = 26, C = +(2*Math.PI*R).toFixed(2);
+  const fab = document.createElement("div");
+  fab.className = "sy-fab";
+  fab.setAttribute("role","progressbar");
+  fab.setAttribute("aria-label","تقدّم القراءة");
+  fab.innerHTML = `
+    <svg viewBox="0 0 72 72" width="60" height="60" aria-hidden="true">
+      <circle class="fab-track" cx="36" cy="36" r="${R}"/>
+      <circle class="fab-fill" cx="36" cy="36" r="${R}" style="--c:${C}"/>
+      <g class="fab-ticks">
+        <line x1="36" y1="6.5" x2="36" y2="10.5"/>
+        <line x1="65.5" y1="36" x2="61.5" y2="36"/>
+        <line x1="36" y1="65.5" x2="36" y2="61.5"/>
+        <line x1="6.5" y1="36" x2="10.5" y2="36"/>
+      </g>
+      <g class="fab-hub"><path d="${pin}" transform="translate(24 24) scale(0.5)"/></g>
+      <g class="fab-rider">
+        <circle class="fab-rider-bg" r="8.5"/>
+        <path class="fab-scooter" d="${scooter}" transform="translate(-12 -12)"/>
+      </g>
+    </svg>
+    <span class="fab-pct">0<i>%</i></span>`;
+  document.body.appendChild(fab);
+
+  const fill = fab.querySelector(".fab-fill");
+  const rider = fab.querySelector(".fab-rider");
+  const pct = fab.querySelector(".fab-pct");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function nearestTokens(){
+    const mid = scrollY + innerHeight/2;
+    const sections = [...document.querySelectorAll("section")];
+    let best = {accent:"15 143 132", accent2:"242 161 90", ink:"234 244 241", card:"14 36 38"}, bestD = Infinity;
+    sections.forEach(el=>{
+      const r = el.getBoundingClientRect();
+      const c = scrollY + r.top + r.height/2;
+      const d = Math.abs(c - mid);
+      if(d < bestD){
+        bestD = d;
+        const cs = getComputedStyle(el);
+        best = {
+          accent: cs.getPropertyValue("--accent").trim() || "15 143 132",
+          accent2: cs.getPropertyValue("--accent-2").trim() || "242 161 90",
+          ink: cs.getPropertyValue("--ink").trim() || "234 244 241",
+          card: cs.getPropertyValue("--surface").trim() || "14 36 38"
+        };
+      }
+    });
+    return best;
+  }
+
+  let raf = false;
+  function frame(){
+    raf = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    const shown = Math.max(p, 0.06);
+    fill.style.strokeDashoffset = (C * (1 - shown)).toFixed(2);
+    const ang = shown * 2 * Math.PI;
+    const rx = (36 + R * Math.sin(ang)).toFixed(2);
+    const ry = (36 - R * Math.cos(ang)).toFixed(2);
+    rider.setAttribute("transform", `translate(${rx} ${ry}) scale(0.62)`);
+    pct.firstChild.textContent = Math.round(p*100);
+    const t = nearestTokens();
+    fab.style.setProperty("--accent", t.accent);
+    fab.style.setProperty("--accent2", t.accent2);
+    fab.style.setProperty("--ink", t.ink);
+    fab.style.setProperty("--card", t.card);
+    fab.classList.toggle("done", p > 0.985);
+  }
+  function onScroll(){ if(!raf){ raf = true; requestAnimationFrame(frame); } }
+  addEventListener("scroll", onScroll, {passive:true});
+  addEventListener("resize", onScroll, {passive:true});
+  frame();
+  if(!reduce) fab.classList.add("ride-in");
+})();
+</script>
+
+<!-- FAB Styles (inline for self-contained deploy) -->
+<style>
+  .sy-fab{
+    position:fixed; inset-inline-end:22px; inset-block-end:22px; z-index:50;
+    width:64px; height:64px; border-radius:50%;
+    display:grid; place-items:center;
+    background:color-mix(in oklab, var(--card,#123033), #000 8%);
+    box-shadow:0 8px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.04) inset;
+    --accent:15 143 132; --accent2:242 161 90; --ink:234 244 241;
+    transition:background .5s ease;
+  }
+  .sy-fab svg{position:absolute; inset:0; margin:auto; overflow:visible}
+  .fab-track{fill:none; stroke:rgb(255 255 255 / .12); stroke-width:2.4}
+  .fab-fill{fill:none; stroke:var(--accent); stroke-width:2.8; stroke-linecap:round;
+    transform:rotate(-90deg); transform-origin:center; stroke-dasharray:var(--c);
+    filter:drop-shadow(0 0 4px color-mix(in oklab, var(--accent), transparent 55%));}
+  .fab-ticks line{stroke:color-mix(in oklab, var(--ink), transparent 55%); stroke-width:1.4; stroke-linecap:round}
+  .fab-hub path{fill:none; stroke:color-mix(in oklab, var(--ink), transparent 30%); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+  .fab-rider-bg{fill:var(--card,#123033); stroke:var(--accent); stroke-width:1.6; filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+  .fab-scooter{fill:none; stroke:var(--accent); stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round}
+  .fab-pct{position:relative; z-index:2; font-size:13px; font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+  .fab-pct i{font-size:8px; font-style:normal; opacity:.6; margin-inline-start:1px}
+  .sy-fab.done{background:var(--accent)}
+  .sy-fab.done .fab-pct{color:#fff}
+  .sy-fab.ride-in{animation:fab-in .9s cubic-bezier(.22,1.2,.36,1) both}
+  @keyframes fab-in{from{transform:translateY(20px) scale(.6); opacity:0} to{transform:none; opacity:1}}
+  @media (max-width:640px){ .sy-fab{width:56px;height:56px; inset-inline-end:16px; inset-block-end:16px} .sy-fab svg{width:52px;height:52px} }
+  @media (prefers-reduced-motion:reduce){ .sy-fab.ride-in{animation:none} }
+</style>
+
+<script>document.getElementById('ts').textContent = new Date().toISOString().slice(0,10)</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SY · CORNICHE DESIGN TOKENS
+   اللاذقية · سوبر-آب توصيل هايبر-لوكال · هوية ساحل متوسطي موثوق
+   ───
+   مستمدة من البحر · الكورنيش · ثقة قبل صخب
+   تركوازي (#0F8F84) + كورال (#F2A15A) على ليل بحري (#0B1C1E)
+   ───
+   Contract: zero hardcoded color in components. Every stroke/fill resolves
+   through these CSS custom properties. Adding a feature never touches this file.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-brand="sy-corniche"] {
+  /* ── Core Accent ── */
+  --accent: 15 143 132;          /* #0F8F84 — تركوازي الكورنيش */
+  --accent-light: 230 245 242;   /* tints on dark */
+  --accent-dark: 11 115 106;     /* pressed states */
+  --accent-tint: 230 245 242;    /* rgba(var(--accent)/.12) */
+
+  /* ── Canvas & Ink ── */
+  --canvas: 11 28 30;            /* #0B1C1E — ليل بحري عميق */
+  --canvas-2: 14 36 38;          /* elevated surfaces */
+  --canvas-3: 18 44 46;          /* sunken / inputs */
+
+  --ink: 234 244 241;            /* #EAF4F1 — أبيض مائل للتركواز */
+  --ink-secondary: 134 170 165;  /* muted */
+  --ink-tertiary: 84 118 115;    /* subtle */
+
+  /* ── Border & Surface ── */
+  --border: 15 143 132;
+  --border-soft: 15 143 132;
+  --border-primary: 15 143 132;
+  --surface: 14 36 38;
+
+  /* ── Atmosphere (doodle field color = ambient wash) ── */
+  --atm-a: 15 143 132;  --atm-a-dark: 15 143 132;
+  --atm-b: 15 143 132;  --atm-b-dark: 15 143 132;
+  --atm-c: 15 143 132;  --atm-c-dark: 15 143 132;
+  --bubble-color: 15 143 132;
+
+  /* ── Semantic ── */
+  --brand-muted: 134 170 165;
+  --success: 52 168 83;
+  --warning: 245 161 90;
+  --error: 229 62 62;
+  --focus: 15 143 132;
+
+  /* ── Coral companion (warmth/appetite) ── */
+  --accent-2: 242 161 90;        /* #F2A15A — كورال شهي */
+  --accent-2-light: 255 240 230;
+  --accent-2-dark: 196 130 73;
+
+  /* ── Ramp for data viz ── */
+  --ramp-1: 15 143 132;
+  --ramp-2: 20 160 148;
+  --ramp-3: 242 161 90;
+  --ramp-4: 255 205 160;
+
+  /* ── Typography (uses existing theme fonts) ── */
+  --brand-font: var(--font-cairo);
+  --heading-font: var(--font-cairo);
+  --body-font: var(--font-satoshi);
+  --mono-font: var(--font-mono);
+
+  /* ── Spacing rhythm (8px base) ── */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px;  --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+  /* ── Radius ── */
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.25);
+  --shadow-md: 0 6px 18px rgba(0,0,0,.35);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.45);
+  --shadow-glow: 0 0 24px rgba(15,143,132,.35);
+
+  /* ── Motion ── */
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --ease-out-quint: cubic-bezier(.23,1,.32,1);
+  --ease-out-back: cubic-bezier(.22,1.2,.36,1);
+  --ease-in-out: cubic-bezier(.4,0,.2,1);
+  --duration-1: 150ms;
+  --duration-2: 250ms;
+  --duration-3: 400ms;
+  --duration-4: 600ms;
+
+  /* ── Z-layers ── */
+  --z-doodle: -1;
+  --z-atmos: 0;
+  --z-content: 10;
+  --z-sticky: 40;
+  --z-fab: 50;
+  --z-overlay: 60;
+  --z-modal: 70;
+  --z-toast: 80;
+}
+
+/* Light mode (if ever needed) — kept for completeness */
+[data-brand="sy-corniche"].light {
+  --canvas: 230 245 242;
+  --canvas-2: 255 255 255;
+  --canvas-3: 240 250 248;
+  --ink: 11 28 30;
+  --ink-secondary: 32 80 76;
+  --ink-tertiary: 52 100 95;
+  --bubble-color: 15 143 132;
+  --surface: 255 255 255;
+  --border-soft: 15 143 132;
+}
